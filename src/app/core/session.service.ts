@@ -107,9 +107,11 @@ export class SessionService {
         let matches = server.match(/\/\/([^\/]+)/);
 
         if(matches[1]) {
-          let url = 'wss://' + 
-            matches[1] + 
-            '/ws';
+          let url = "wss://";
+          if (matches[1] == "localhost:8080") {
+            url = "ws://";
+          }
+          url += matches[1] + '/ws';
 
           this.wsService.init(url, sessionId);
 
